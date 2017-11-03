@@ -3,7 +3,7 @@ title: "Cyber-Scurity"
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
 header:
-  teaser: /images/IMG_20171026_153523.jpg
+  teaser: "/images/IMG_20171026_153523.jpg"
   links:
     - "https://twitter.com/niteshkumar1896"
     - "https://www.linkedin.com/in/nitesh-kumar-405415a2/"
