@@ -1,6 +1,20 @@
-name: Nitesh kumar
-title: Cyber-Scurity
+name: "Nitesh kumar"
+title: "Cyber-Scurity"
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
+header:
+  teaser: /images/IMG_20171026_153523.jpg
+  links:
+    - "https://twitter.com/niteshkumar1896"
+    - "https://www.linkedin.com/in/nitesh-kumar-405415a2/"
+  author:
+  name   : "Nitesh Kumar"
+  avatar : "/images/32159737.jpeg"
+  bio    : "My awesome biography constrained to a sentence or two goes here."
+  email  : "niteshkumar1896@gmai.com"
+  uri    : "http://rvphotoshop.wordpress.com"
+
+
+
 
 theme: jekyll-theme-midnight
