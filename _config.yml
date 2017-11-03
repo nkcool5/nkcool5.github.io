@@ -1,8 +1,7 @@
 # Site settings
-#title: Cyber-Security
+name: Nitesh Kumar
+title: Cyber-Security
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
 header-img: "/images/IMG_20171026_153523.jpg"
-  email  : niteshkumar1896@gmai.com
-  #
 theme: jekyll-theme-midnight
