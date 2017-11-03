@@ -3,7 +3,6 @@ markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
 header-img: "/images/IMG_20171026_153523.jpg"
 github_username: nkcool5
-  links:
     twitter: https://twitter.com/niteshkumar1896
     linkedin: https://www.linkedin.com/in/nitesh-kumar-405415a2/
   email  : niteshkumar1896@gmai.com
