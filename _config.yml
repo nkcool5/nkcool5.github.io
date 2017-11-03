@@ -1,5 +1,4 @@
 name: Nitesh kumar
-theme: jekyll-theme-dinky
 title: Nitesh Kumar
 gems:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
