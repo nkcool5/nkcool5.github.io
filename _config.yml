@@ -27,3 +27,5 @@ footer-links-active:
   facebook: true
   google: false
   linkedin: true
+
+theme: jekyll-theme-cayman
