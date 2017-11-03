@@ -4,6 +4,7 @@ body {
 }
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    font-size: 1.5em;
     background-color: cyan;
     padding: 0px;
     list-style: none;
