@@ -1,26 +1,32 @@
-name: Nitesh kumar
-title: Nitesh Kumar
-gems:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
-  avatar: https://github.com/nkcool5/nkcool5.github.io/blob/master/32159737.jpeg
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - CNAME
-  
-footer-links:
-  dribbble:
-  email:
-  facebook:
-  flickr:
-  github: nkcool5/jekyll-now
-  instagram:
-  linkedin:
-  pinterest:
-  rss: # just type anything here for a working RSS icon
-  twitter: jekyllrb
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
-  youtube: # channel/<your_long_string> or user/<user-name>
-  googleplus: # anything in your profile username that comes after plus.google.com/
+# Site wide configuration
+
+title: Site Title
+locale: en_US
+description: Describe your website here.
+logo: 32159737.jpeg
+search: true
+
+# Site owner
+owner:
+  name: Your Name
+  avatar: bio-photo.jpg
+  email: you@email.com
+  disqus-shortname:
+  twitter: #username
+  facebook: #username
+  github: #username
+  stackexchange: #http://stackoverflow.com/users/123456/username
+  linkedin: #username
+  instagram: #username
+  flickr: #username
+  tumblr: #username
+  pinterest: #username
+  weibo: #userid
+  google:
+    plus: #username
+    analytics:
+    verify:
+    ad-client:
+    ad-slot:
+  bing-verify:
+
