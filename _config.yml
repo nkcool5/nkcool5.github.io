@@ -1,13 +1,7 @@
-name: Nitesh kumar
 title: Nitesh Kumar
 
   avatar: /images/32159737.jpeg
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - CNAME
-  
+
 footer-links-active:
   rss: false
   facebook: true
