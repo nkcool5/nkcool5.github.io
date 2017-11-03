@@ -4,7 +4,7 @@ body {
 }
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    background-color: green;
+    background-color: cyan;
     padding: 0px;
     list-style: none;
     font-weight: bold;
@@ -19,7 +19,7 @@ a {
 }
 a:hover {
     text-decoration: underline;
-    color: green;
+    color: blue;
 }
 h1 {
     font-size: 3em;
