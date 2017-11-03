@@ -5,8 +5,3 @@ M.tech Cybersecurity
 
 M.tech 1st sem important files download [link](http://nkcool5.github.io/download.html)
 ---
-image:
-
-  feature: 32159737.jpeg
-  credit: nitesh
----  
