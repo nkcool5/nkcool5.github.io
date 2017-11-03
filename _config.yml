@@ -1,9 +1,9 @@
 name: Nitesh kumar
 title: Nitesh Kumar
-avatar: https://avatars1.githubusercontent.com/u/32159737?s=400&u=62c2bdeeb6f85972a6d0905ff7ea4775792ffee1&v=4
 gems:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  avatar: https://github.com/nkcool5/nkcool5.github.io/blob/master/32159737.jpeg
 exclude:
   - Gemfile
   - Gemfile.lock
