@@ -1,3 +1,11 @@
 theme: jekyll-theme-cayman
+header-img: "images/IMG_20171026_153523.jpg"
+email: niteshkumar1896@gmail.com
+# url: "http://yourdomain.com"
+github_username:  nkcool5
+linkedin: https://www.linkedin.com/in/nitesh-kumar-405415a2/
+
+# Build settings
 markdown: kramdown
-name: Nitesh Kumar 
+highlighter: pygments
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
