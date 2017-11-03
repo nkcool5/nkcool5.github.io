@@ -1,3 +1,4 @@
+# Site settings
 title: Cyber-Security
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
