@@ -1,11 +1,11 @@
 body {
     margin: 60px auto;
-    background: url(images/stripe.png) repeat;
+    background: url(/images/stripe.png) repeat;
     width: 70%;
 }
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    background: url(images/bar-bg.jpg) repeat-x;
+    background: url(/images/bar-bg.jpg) repeat-x;
     font-size: 1.5em;
     padding: 0px;
     list-style: none;
