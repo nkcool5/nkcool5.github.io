@@ -1,1 +1,71 @@
 theme: jekyll-theme-midnight
+minimal_mistakes_skin : "mint"
+title: "Cyber Security"
+name: "Nitesh Kumar"
+description: "Secure the internet from the malicious attacks."
+repository: "nkcool5/advance-computer-network"
+teaser: /images/32159737.jpeg
+header:
+  teaser: /images/IMG_20171026_153523.jpg
+  permalink: /:categories/:title/
+  breadcrumbs: true
+  defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      read_time: true
+comments: true
+comments:
+  provider               : "facebook"
+  facebook:
+    appid                : # optional
+    num_posts            : # 5 (default)
+    colorscheme          : # "light" (default), "dark"
+social:
+  type:  # Person or Organization (defaults to Person)
+  name:  # If the user or organization name differs from the site's name
+  links:
+    - "https://twitter.com/niteshkumar1896"
+    - "https://facebook.com/hedelwerg"
+    - "https://www.linkedin.com/in/nitesh-kumar-405415a2/"
+    analytics:
+  provider: "google-universal"
+  google:
+    tracking_id: "UA-1234567-8"
+
+    author:
+  name   : "Nitesh Kumar"
+  avatar : "/images/32159737.jpeg"
+  bio    : "My awesome biography constrained to a sentence or two goes here."
+  email  : # optional
+  uri    : "http://nkcool5.github.io"
+ 
+ defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      markdown: kramdown
+      kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+
+
+
+
