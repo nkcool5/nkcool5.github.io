@@ -2,14 +2,14 @@ body {
     margin: 60px auto;
     width: 80%;
 }
-nav ul, footer ul {
+header ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
     font-size: 1.5em;
     padding: 0px;
     list-style: none;
     font-weight: bold;
 }
-nav ul li, footer ul li {
+header ul li, footer ul li {
     display: inline;
     margin-right: 20px;
 }
@@ -27,10 +27,13 @@ a:hover {
     font-size:120%;
     color: cyan;
 }
-h1, h2 {
+h1 {
     text-align: center;
     font-size: 4em;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+}
+h2 {
+    text-align: center;
+    font-size: 4em;
 }
 p {
     font-size: 1.5em;
