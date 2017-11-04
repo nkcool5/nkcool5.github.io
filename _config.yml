@@ -26,10 +26,7 @@ comments:
 social:
   type:  # Person or Organization (defaults to Person)
   name:  # If the user or organization name differs from the site's name
-  links:
-    - "https://twitter.com/niteshkumar1896"
-    - "https://facebook.com/hedelwerg"
-    - "https://www.linkedin.com/in/nitesh-kumar-405415a2/"
+ 
     analytics:
   provider: "google-universal"
   google:
@@ -64,8 +61,3 @@ social:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
-
-
-
-
-
