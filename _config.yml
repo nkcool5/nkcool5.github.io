@@ -1,8 +1,9 @@
 #site theme
-name: Nitesh Kumar
+title: "Cyber Security"
+name: "Nitesh Kumar"
 locale                   : "en"
 minimal_mistakes_skin : "mint"
-title: "Cyber Security"
+
 description: "Secure the internet from the malicious attacks."
 repository: "nkcool5/advance-computer-network"
 teaser: /images/32159737.jpeg
