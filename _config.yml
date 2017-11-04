@@ -6,5 +6,5 @@ permalink: /blog/:year/:month/:day/:title/
 header-img: "/images/IMG_20171026_153523.jpg"
 footer-links:
 linkedin: https://www.linkedin.com/in/nitesh-kumar-405415a2/
-twitter: @niteshkumar1896
+twitter: https://twitter.com/niteshkumar1896
 theme: jekyll-theme-midnight
