@@ -24,9 +24,8 @@ a {
 }
 a:hover {
     text-decoration: underline;
-    font-size:150%;
-     background-color: green;
-    color: red;
+    font-size:120%;
+    color: cyan;
 }
 h1 {
     font-size: 3em;
