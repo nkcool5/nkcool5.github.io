@@ -25,10 +25,11 @@ a {
 }
 a:hover {
     text-decoration: underline;
-    font-size:120%;
+    font-size:150%;
     color: cyan;
 }
 h1 {
+    text-decoration: underline;
     text-align: center;
     font-size: 4em;
 }
