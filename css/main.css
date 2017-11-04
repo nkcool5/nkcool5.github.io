@@ -18,10 +18,11 @@ footer{
 }
 a {
     text-decoration: none;
-    color: green;
+     border: 2px;
 }
 a:hover {
     text-decoration: underline;
+    font-size:150%;
     color: red;
 }
 h1 {
