@@ -1,51 +1,627 @@
----
-layout : default
----
-<html>
-  <head>
-    <title>Cyber-Security</title>
-    
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-  
-  </head>
-	
- <body>
-	 
-	 <header>
-		 <h1>Secure the internet from malicious attack</h1> 
-		 <a href="https://www.linkedin.com/in/nitesh-kumar-405415a2/" target="_blank"><img src="/images/linkedin-2048132_640.png" height=50px width=50px hspace="10"></a>
-		 <a href="https://twitter.com/niteshkumar1896" target="_blank"><img src="/images/twitter.png" height=50px width=50px></a>
-		 <a href="https://www.instagram.com/niteshcool.1/" target="_blank"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6CpBUwn1zg7L5CRPKZQCYpWmaul3MG2_7izYJ_Cr40yco2iu9" height=50px width=50px hspace="10"></a>
-		 <a href="https://www.facebook.com/hedelwerg" target="_blank"><img src="/images/facebook.png" height=50px width=50px></a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nitesh Kumar - Cybersecurity Professional | Deputy Manager at EIL | PhD Candidate (IIT Kanpur) | Malware Analysis &amp; Threat Intelligence Expert">
+    <title>Nitesh Kumar | Cybersecurity Professional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #00d4ff;
+        }
+        
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00d4ff;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: #00d4ff;
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .timeline-dot {
+            box-shadow: 0 0 0 8px rgba(0, 212, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 212 255 / 0.1), 0 8px 10px -6px rgb(0 212 255 / 0.1);
+        }
+        
+        .publication-list li {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .publication-list li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200 font-['Inter']">
+    <!-- NAVBAR -->
+    <nav class="bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-[#00d4ff] rounded-2xl flex items-center justify-center text-zinc-950 font-bold text-2xl rotate-12">N</div>
+                <h1 class="text-2xl font-semibold tracking-tighter font-['Space_Grotesk']">Nitesh Kumar</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="nav-link text-zinc-300 hover:text-white">About</a>
+                <a href="#experience" class="nav-link text-zinc-300 hover:text-white">Experience</a>
+                <a href="#education" class="nav-link text-zinc-300 hover:text-white">Education</a>
+                <a href="#skills" class="nav-link text-zinc-300 hover:text-white">Skills</a>
+                <a href="#projects" class="nav-link text-zinc-300 hover:text-white">Projects</a>
+                <a href="#publications" class="nav-link text-zinc-300 hover:text-white">Publications</a>
+                <a href="#honors" class="nav-link text-zinc-300 hover:text-white">Honors</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="https://www.linkedin.com/in/nitesh-kumar-405415a2/" target="_blank" 
+                   class="flex items-center justify-center w-10 h-10 border border-zinc-700 hover:border-[#00d4ff] rounded-2xl text-zinc-400 hover:text-[#00d4ff]">
+                    <i class="fa-brands fa-linkedin text-xl"></i>
+                </a>
+                <a href="https://scholar.google.com/citations?hl=en&user=au8V2YIAAAAJ" target="_blank"
+                   class="flex items-center justify-center w-10 h-10 border border-zinc-700 hover:border-[#00d4ff] rounded-2xl text-zinc-400 hover:text-[#00d4ff]">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                </a>
+                <a href="mailto:niteshkr@cse.iitk.ac.in" 
+                   class="flex items-center justify-center w-10 h-10 border border-zinc-700 hover:border-[#00d4ff] rounded-2xl text-zinc-400 hover:text-[#00d4ff]">
+                    <i class="fa-solid fa-envelope text-xl"></i>
+                </a>
+                
+                <!-- Resume Download -->
+                <a href="Nitesh_Resume_final.pdf" download
+                   class="flex items-center gap-2 bg-white text-zinc-950 px-6 py-2.5 rounded-3xl font-semibold text-sm hover:bg-[#00d4ff] hover:text-white">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Resume</span>
+                </a>
+                
+                <!-- Mobile Menu -->
+                <button id="mobile-menu-button" class="md:hidden text-2xl text-zinc-400 hover:text-white">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-zinc-800 px-8 py-6">
+            <div class="flex flex-col gap-6 text-lg">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#publications" class="nav-link">Publications</a>
+                <a href="#honors" class="nav-link">Honors</a>
+                <div class="pt-4 border-t border-zinc-700 flex gap-6">
+                    <a href="https://www.linkedin.com/in/nitesh-kumar-405415a2/" target="_blank" class="flex-1 text-center py-3 border border-zinc-700 rounded-3xl">LinkedIn</a>
+                    <a href="https://scholar.google.com/citations?hl=en&user=au8V2YIAAAAJ" target="_blank" class="flex-1 text-center py-3 border border-zinc-700 rounded-3xl">Google Scholar</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
- <ul>
-                        <li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/cv/niteshresume.odt">CV</a></li>
-        		<li><a href="/blog">Blog</a></li>
-	                <li>
-				<a href="WindowsFormsApplication1.exe" > click to download </a></li>
-			<li><a href="nkcool5.github.io/download.html" target="_blank">M.Tech-1st-SEM</a></li>
-</ul>
-	 </header>
-	 <div>
-        		<img src="/images/32159737.jpeg" align="right" height=200px width=180px hspace="10" vspace="15" >
-				<BR CLEAR=”all” /> 
-		 <h2>NITESH KUMAR</h2>
-	   <p>M.Tech 1st Semester [Cyber Security] from:<em>(Dr.A.P.J. Abdul Kalam Technical University AKTU LUCKNOW)</em> </p>
-   	</div>
-		 <hr>	
-	 <h3>GROUP MEMBERS</h3>
-		 </hr>
-	 <div> <img src="/images/IMG_20171026_153523.jpg" heigth=640px width=720px></div>
-				 
-	 <br/>
-<footer>
-   <ul>
-   			<li><a href="mailto:niteshkumar1896@gmail.com">email</a></li>
-        		<li><a href="https://github.com/nkcool5">My-github-profile</a></li>
-   </ul>
-</footer>
-  </body>
+    <!-- HERO -->
+    <header class="hero-bg min-h-screen flex items-center pt-16">
+        <div class="max-w-screen-2xl mx-auto px-8 grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white text-sm font-medium px-5 py-2 rounded-3xl mb-6">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    Deputy Manager @ EIL
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-none font-['Space_Grotesk'] mb-4">
+                    Nitesh Kumar
+                </h1>
+                <h2 class="text-4xl md:text-5xl text-[#00d4ff] font-semibold tracking-tight mb-8">
+                    Cybersecurity Professional
+                </h2>
+                
+                <p class="text-xl text-zinc-400 max-w-lg mb-10">
+                    Deputy Manager at Engineers India Limited (EIL). PhD Candidate in Cyber Security at IIT Kanpur. 
+                    6+ years of experience in Malware Analysis, Threat Intelligence, Attack Path Analysis, and Formal Verification. 
+                    15+ international publications in top cybersecurity venues.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" 
+                       class="bg-[#00d4ff] hover:bg-cyan-300 text-zinc-950 font-semibold px-8 py-4 rounded-3xl flex items-center gap-3 text-lg">
+                        Get in touch
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    
+                    <a href="https://security.cse.iitk.ac.in/deter" target="_blank"
+                       class="border border-zinc-300 hover:border-white text-zinc-200 font-medium px-8 py-4 rounded-3xl flex items-center gap-3">
+                        <i class="fa-solid fa-link"></i>
+                        View Research
+                    </a>
+                </div>
+                
+                <div class="mt-16 flex items-center gap-8 text-sm">
+                    <div>
+                        <span class="block text-zinc-400 text-xs tracking-widest">CURRENT ROLE</span>
+                        <span class="font-semibold">Deputy Manager, EIL • Oct 2025–Present</span>
+                    </div>
+                    <div class="h-8 w-px bg-zinc-700"></div>
+                    <div>
+                        <span class="block text-zinc-400 text-xs tracking-widest">PHD</span>
+                        <span class="font-semibold">IIT Kanpur • 2021–Present</span>
+                    </div>
+                    <div class="h-8 w-px bg-zinc-700"></div>
+                    <div>
+                        <span class="block text-zinc-400 text-xs tracking-widest">M.TECH</span>
+                        <span class="font-semibold">Gold Medalist • AKTU Lucknow</span>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-zinc-400">
+                    <a href="tel:+918354977400" class="flex items-center gap-2 hover:text-[#00d4ff]">
+                        <i class="fa-solid fa-phone"></i>
+                        (+91) 83549 77400
+                    </a>
+                    <a href="mailto:niteshkr@cse.iitk.ac.in" class="flex items-center gap-2 hover:text-[#00d4ff]">
+                        <i class="fa-solid fa-envelope"></i>
+                        niteshkr@cse.iitk.ac.in
+                    </a>
+                    <a href="mailto:17mcs08@gmail.com" class="flex items-center gap-2 hover:text-[#00d4ff]">
+                        <i class="fa-solid fa-envelope"></i>
+                        17mcs08@gmail.com
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right side visual -->
+            <div class="md:col-span-5 hidden lg:flex justify-end">
+                <div class="relative">
+                    <div class="w-80 h-80 bg-gradient-to-br from-[#00d4ff]/20 to-transparent rounded-[4rem] rotate-12 flex items-center justify-center border border-[#00d4ff]/30">
+                        <div class="w-64 h-64 bg-zinc-900 rounded-3xl flex flex-col items-center justify-center text-center p-8">
+                            <div class="text-8xl mb-4">🔒</div>
+                            <div class="text-[#00d4ff] font-semibold text-2xl">Cybersecurity Leadership</div>
+                            <div class="text-zinc-400 mt-2">Malware Analysis • Threat Intelligence • Formal Methods</div>
+                            <div class="mt-auto text-xs text-zinc-500 font-mono">EIL • IIT Kanpur</div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-zinc-900 border border-zinc-700 rounded-3xl px-6 py-4 shadow-2xl flex items-center gap-3">
+                        <div class="text-emerald-400">
+                            <i class="fa-solid fa-circle-check text-3xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">15+ Publications</div>
+                            <div class="text-sm text-zinc-400">ICISSP • ASIACCS • IEEE-CSR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <!-- ABOUT -->
+    <section id="about" class="max-w-screen-2xl mx-auto px-8 py-20 border-t border-zinc-800">
+        <div class="grid md:grid-cols-12 gap-12">
+            <div class="md:col-span-4">
+                <h2 class="section-header text-5xl font-semibold tracking-tight font-['Space_Grotesk']">About Me</h2>
+            </div>
+            <div class="md:col-span-8 text-lg leading-relaxed text-zinc-300">
+                <p class="mb-6">
+                    Looking to attain a position as an Information Security Analyst that encourages the use of computer and analytical skills to serve and protect the organization.
+                </p>
+                <p>
+                    I am a cybersecurity professional with over 6 years of hands-on experience in malware analysis (Windows, Linux, Android), reverse engineering, formal verification, and threat intelligence. 
+                    Currently serving as Deputy Manager at Engineers India Limited (EIL). Previously worked as Senior Research Engineer at C3iHub, IIT Kanpur on industry-collaborated projects involving Formal Methods &amp; Verification, and advanced malware detection systems.
+                </p>
+                <div class="mt-8 flex gap-8 text-sm">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-[#00d4ff]"></i>
+                        <span>Deep expertise in ELF, PE, APK analysis</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-[#00d4ff]"></i>
+                        <span>Real-time behavioral monitoring tools</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-network-wired text-[#00d4ff]"></i>
+                        <span>Attack path graph validation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="bg-zinc-900 py-20">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <h2 class="section-header text-5xl font-semibold tracking-tight font-['Space_Grotesk'] mb-12">Professional Experience</h2>
+            
+            <div class="space-y-12">
+                <!-- Current Role - Deputy Manager at EIL -->
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-3 text-zinc-400 font-medium">
+                        16 Oct 2025 – Present<br>
+                        <span class="text-[#00d4ff] font-semibold">Deputy Manager</span>
+                    </div>
+                    <div class="md:col-span-9">
+                        <h3 class="text-2xl font-semibold mb-1">Engineers India Limited (EIL)</h3>
+                        <p class="text-zinc-400">Cybersecurity and Information Security operations.</p>
+                    </div>
+                </div>
+                
+                <!-- Senior Research Engineer -->
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-3 text-zinc-400 font-medium">
+                        22 Feb 2024 – 15 Oct 2025<br>
+                        <span class="text-[#00d4ff] font-semibold">Senior Research Engineer</span>
+                    </div>
+                    <div class="md:col-span-9">
+                        <h3 class="text-2xl font-semibold mb-1">C3iHub, IIT Kanpur</h3>
+                        <p class="text-zinc-400">Working on industry-collaborated projects using Formal Methods &amp; Verification, and Malware Analysis.</p>
+                    </div>
+                </div>
+                
+                <!-- SR. Project Engineer -->
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-3 text-zinc-400 font-medium">
+                        22 Mar 2022 – 21 Feb 2024<br>
+                        <span class="text-[#00d4ff] font-semibold">SR. Project Engineer</span>
+                    </div>
+                    <div class="md:col-span-9">
+                        <h3 class="text-2xl font-semibold mb-1">C3i Lab, Department of Computer Science &amp; Engg., IIT Kanpur</h3>
+                        <p class="text-zinc-400">Advanced malware analysis and cybersecurity research projects.</p>
+                    </div>
+                </div>
+                
+                <!-- Project Engineer -->
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-3 text-zinc-400 font-medium">
+                        03 Aug 2019 – 21 Mar 2022<br>
+                        <span class="text-[#00d4ff] font-semibold">Project Engineer</span>
+                    </div>
+                    <div class="md:col-span-9">
+                        <h3 class="text-2xl font-semibold mb-1">C3i Lab, IIT Kanpur</h3>
+                        <p class="text-zinc-400">Development of cybersecurity tools and malware detection systems.</p>
+                    </div>
+                </div>
+                
+                <!-- Project Associate -->
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-3 text-zinc-400 font-medium">
+                        17 Sep 2018 – 31 Jul 2019<br>
+                        <span class="text-[#00d4ff] font-semibold">Project Associate</span>
+                    </div>
+                    <div class="md:col-span-9">
+                        <h3 class="text-2xl font-semibold mb-1">C3i Lab, IIT Kanpur</h3>
+                        <p class="text-zinc-400">Early-stage research in malware classification and intrusion detection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="max-w-screen-2xl mx-auto px-8 py-20">
+        <h2 class="section-header text-5xl font-semibold tracking-tight font-['Space_Grotesk'] mb-12">Education</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- PhD -->
+            <div class="bg-zinc-900 rounded-3xl p-8 card-hover">
+                <div class="text-[#00d4ff] text-sm font-semibold mb-3">2021 – Present</div>
+                <h4 class="font-semibold text-xl">PhD (Part-Time &amp; Sponsored)</h4>
+                <p class="text-zinc-400">Computer Science and Engineering • Specialization in Cyber Security</p>
+                <p class="mt-8 text-sm font-medium">Indian Institute of Technology, Kanpur</p>
+            </div>
+            
+            <!-- M.Tech -->
+            <div class="bg-zinc-900 rounded-3xl p-8 card-hover">
+                <div class="text-[#00d4ff] text-sm font-semibold mb-3">June 2019</div>
+                <h4 class="font-semibold text-xl">M.Tech in Computer Science and Engineering</h4>
+                <p class="text-zinc-400">Specialization in Cyber Security • <span class="text-amber-400">Gold Medalist</span></p>
+                <p class="mt-8 text-sm font-medium">Centre for Advanced Studies, AKTU, Lucknow</p>
+            </div>
+            
+            <!-- B.Tech -->
+            <div class="bg-zinc-900 rounded-3xl p-8 card-hover">
+                <div class="text-[#00d4ff] text-sm font-semibold mb-3">June 2017</div>
+                <h4 class="font-semibold text-xl">B.Tech in Computer Science and Engineering</h4>
+                <p class="text-zinc-400">Gurukula Kangri Vishwavidyalaya, Haridwar</p>
+            </div>
+            
+            <!-- School -->
+            <div class="bg-zinc-900 rounded-3xl p-8 card-hover">
+                <div class="text-[#00d4ff] text-sm font-semibold mb-3">2010 – 2012</div>
+                <h4 class="font-semibold text-xl">Class XII &amp; X (State Board)</h4>
+                <p class="text-zinc-400">R.K.M. Inter College &amp; Adarsh Rastriya Inter College, Hardoi</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="bg-zinc-900 py-20">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <h2 class="section-header text-5xl font-semibold tracking-tight font-['Space_Grotesk'] mb-12">Technical Skills</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="bg-zinc-800 rounded-3xl p-6">
+                    <div class="uppercase text-xs text-zinc-400 mb-4">Malware Analysis</div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Static &amp; Dynamic Analysis</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Reverse Engineering</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">ELF • PE • APK</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Cuckoo Sandbox</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Behavioral Tracing</span>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-800 rounded-3xl p-6">
+                    <div class="uppercase text-xs text-zinc-400 mb-4">Cybersecurity</div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Intrusion Detection</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Network Security Monitoring</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Attack Path Analysis</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Threat Intelligence</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Incident Response</span>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-800 rounded-3xl p-6">
+                    <div class="uppercase text-xs text-zinc-400 mb-4">Programming</div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Python (Advanced)</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">C</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Shell Scripting</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">PowerShell</span>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-800 rounded-3xl p-6">
+                    <div class="uppercase text-xs text-zinc-400 mb-4">Tools &amp; Frameworks</div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">PEid • pestudio • pdfid</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Apktool • scikit-learn</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">PRISM Model Checker</span>
+                        <span class="px-4 py-1 bg-zinc-700 text-zinc-200 rounded-3xl text-sm">Metasploit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="max-w-screen-2xl mx-auto px-8 py-20">
+        <h2 class="section-header text-5xl font-semibold tracking-tight font-['Space_Grotesk'] mb-12">Key Projects</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="card-hover bg-zinc-900 rounded-3xl p-8">
+                <div class="text-[#00d4ff] text-xs mb-2">Hitachi India Limited – IIT Kanpur Collaboration</div>
+                <h3 class="font-semibold text-2xl mb-3">Validation of Attack Path Graph Analysis</h3>
+                <p class="text-zinc-400 text-lg">Developed technology to validate vulnerability prediction models using PRISM Model Checker. Focused on improving accuracy of attack path predictions in IT systems.</p>
+                <div class="mt-8 text-xs font-medium flex items-center gap-2">
+                    <span class="px-3 py-1 bg-black/50 rounded-3xl">PRISM Model Checker</span>
+                    <a href="https://security.cse.iitk.ac.in/deter" target="_blank" class="text-[#00d4ff] flex items-center gap-1">
+                        View Project <i class="fa-solid fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="card-hover bg-zinc-900 rounded-3xl p-8">
+                <div class="text-[#00d4ff] text-xs mb-2">C3i Lab, IIT Kanpur</div>
+                <h3 class="font-semibold text-2xl mb-3">A Hybrid Approach to detect Advanced Linux Malware</h3>
+                <p class="text-zinc-400 text-lg">Performed static and dynamic analysis of Linux ELF executables. Built a hybrid detection framework combining multiple analysis techniques.</p>
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <span class="text-xs px-4 py-1 bg-emerald-900 text-emerald-300 rounded-3xl">ELF Analysis</span>
+                    <span class="text-xs px-4 py-1 bg-emerald-900 text-emerald-300 rounded-3xl">Static + Dynamic</span>
+                </div>
+            </div>
+            
+            <!-- Additional academic projects -->
+            <div class="card-hover bg-zinc-900 rounded-3xl p-8 md:col-span-2 lg:col-span-1">
+                <h3 class="font-semibold mb-4">Additional Academic Projects</h3>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex justify-between"><span>Static analysis of malicious Android applications</span><span class="text-zinc-400">Apktool + Python</span></li>
+                    <li class="flex justify-between"><span>Opcode frequency based Windows malware detection using MapReduce</span><span class="text-zinc-400">Objdump + Python</span></li>
+                    <li class="flex justify-between"><span>Injecting Metasploit Payloads into Android Apps</span><span class="text-zinc-400">Metasploit • Android SDK</span></li>
+                    <li class="flex justify-between"><span>Operating System Security Project (Linux Auth + Dictionary Attack)</span><span class="text-zinc-400">Python + Shell</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="bg-zinc-900 py-20">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="flex items-center justify-between mb-12">
+                <h2 class="section-header text-5xl font-semibold tracking-tight font-['Space_Grotesk']">Publications</h2>
+                <a href="https://scholar.google.com/citations?hl=en&user=au8V2YIAAAAJ" target="_blank" 
+                   class="text-[#00d4ff] flex items-center gap-2 text-sm font-medium">
+                    VIEW ALL ON GOOGLE SCHOLAR 
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Conferences -->
+                <div>
+                    <h4 class="uppercase text-xs font-semibold mb-6 text-zinc-400">International Conferences (Selected)</h4>
+                    <ul class="publication-list space-y-6 text-sm">
+                        <li>Kriti Majumdar, Nitesh Kumar et al. “A Hybrid Approach for Intrusion Detection in FTP Logs...” AISC 2025</li>
+                        <li>Kriti Majumdar, Nitesh Kumar et al. “Attackers Profiling Based on Multi-Attack Patterns in SSH Service”, ICISSP 2025</li>
+                        <li>Mohammed Jawed, Nitesh Kumar et al. “ArkThor: Threat Categorization Based on Malwares C2 Communication”, ICISSP 2024</li>
+                        <li>Aman Srivastava, Nitesh Kumar et al. “Ransomware Detection based on Network Behavior...”, IEEE-CSR 2023</li>
+                        <li>Nitesh Kumar, Anand Handa, Sandeep K. Shukla. “RBMon: Real Time System Behavior Monitoring Tool”, ASIACCS 2022</li>
+                    </ul>
+                </div>
+                
+                <!-- Journals + Others -->
+                <div>
+                    <h4 class="uppercase text-xs font-semibold mb-6 text-zinc-400">Journals &amp; Book Chapters</h4>
+                    <ul class="publication-list space-y-6 text-sm">
+                        <li>Sambhrant Maurya, Nitesh Kumar et al. “Adversarially robust and real-time DDoS detection...” Information Security Journal, 2024</li>
+                        <li>Shubham Rana, Nitesh Kumar et al. “Automated Windows Behavioral Tracing for Malware Analysis”, Security and Privacy Journal, Wiley, 2022</li>
+                        <li>Multiple book chapters in “Implementing Enterprise Cybersecurity with Open-Source Software”, River Publishers, 2021</li>
+                    </ul>
+                    <p class="text-xs mt-8 text-zinc-400">Total: 20+ peer-reviewed publications in IEEE, Springer, ACM venues.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HONORS &amp; WORKSHOPS -->
+    <section id="honors" class="max-w-screen-2xl mx-auto px-8 py-20">
+        <h2 class="section-header text-5xl font-semibold tracking-tight font-['Space_Grotesk'] mb-12">Honors &amp; Recognitions</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="flex gap-6">
+                <i class="fa-solid fa-trophy text-5xl text-amber-400 mt-1"></i>
+                <div>
+                    <p class="font-semibold">Best M.Tech Project Award</p>
+                    <p class="text-sm text-zinc-400">Centre for Advanced Studies, AKTU (2017-2019)</p>
+                </div>
+            </div>
+            <div class="flex gap-6">
+                <i class="fa-solid fa-chalkboard-teacher text-5xl text-emerald-400 mt-1"></i>
+                <div>
+                    <p class="font-semibold">Teaching Assistant – Summer of Code 2018</p>
+                    <p class="text-sm text-zinc-400">Python Programming, IIT Kanpur (Nutanix &amp; UPSIDC sponsored)</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-16">
+            <h4 class="text-sm uppercase font-semibold mb-6">Conferences &amp; Workshops Attended</h4>
+            <div class="text-zinc-400 text-sm grid grid-cols-1 md:grid-cols-3 gap-y-4">
+                <div>SPACE 2018 – IIT Kanpur</div>
+                <div>Machine Learning with Python – AKTU Lucknow</div>
+                <div>Python Workshop – IIT Kanpur</div>
+                <div>STC-CYBERSEC under TEQIP-III – AKTU Lucknow</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / CONTACT -->
+    <footer id="contact" class="bg-black py-16 border-t border-zinc-800">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 bg-[#00d4ff] rounded-2xl flex items-center justify-center text-zinc-950 text-3xl rotate-12">N</div>
+                        <span class="font-['Space_Grotesk'] text-3xl">Nitesh Kumar</span>
+                    </div>
+                    <p class="text-zinc-400">Cybersecurity Professional • Deputy Manager, EIL</p>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p class="text-xs text-zinc-500">Last updated: April 09, 2026</p>
+                    <p class="text-zinc-400">Made with ❤️ for GitHub Pages</p>
+                    <div class="flex justify-center md:justify-end gap-6 mt-6 text-2xl">
+                        <a href="https://www.linkedin.com/in/nitesh-kumar-405415a2/" target="_blank" class="hover:text-[#00d4ff]"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=au8V2YIAAAAJ" target="_blank" class="hover:text-[#00d4ff]"><i class="fa-solid fa-graduation-cap"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script initialization
+        function initializeTailwind() {
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
+                }
+            }
+        }
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu')
+            const icon = document.getElementById('mobile-menu-button').querySelector('i')
+            
+            if (menu.classList.contains('hidden')) {
+                menu.style.display = 'block'
+                icon.classList.replace('fa-bars', 'fa-xmark')
+            } else {
+                menu.style.display = 'none'
+                icon.classList.replace('fa-xmark', 'fa-bars')
+            }
+        })
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return
+                e.preventDefault()
+                
+                const target = document.querySelector(this.getAttribute('href'))
+                if (target) {
+                    const navHeight = 80
+                    const elementPosition = target.getBoundingClientRect().top
+                    const offsetPosition = elementPosition + window.scrollY - navHeight
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    })
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu')
+                    if (mobileMenu.style.display === 'block') {
+                        mobileMenu.style.display = 'none'
+                        document.getElementById('mobile-menu-button').querySelector('i').classList.replace('fa-xmark', 'fa-bars')
+                    }
+                }
+            })
+        })
+        
+        // Initialize everything
+        window.onload = initializeTailwind
+    </script>
+</body>
 </html>
