@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeClick India - Digital Safety Trainer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f8f9fa; color: #333; }
+    #app { max-width: 960px; margin: 0 auto; min-height: 100vh; background: white; box-shadow: 0 0 25px rgba(0,0,0,0.06); overflow: hidden; }
+
+    .screen { 
+      display: none; 
+      padding: 1.5rem; 
+      opacity: 0; 
+      transition: opacity 0.4s ease; 
+    }
+    .screen.active { 
+      display: block; 
+      opacity: 1; 
+    }
+
+    .hub-header { 
+      text-align: center; padding: 2.8rem 1rem 1.8rem; 
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6); 
+      color: white; 
+      border-radius: 0 0 24px 24px; 
+    }
+    .hub-header h1 { font-size: 29px; font-weight: 700; margin-bottom: 8px; }
+    .hub-header p { font-size: 16.5px; opacity: 0.92; }
+
+    .score-bar { display: flex; justify-content: center; gap: 1.2rem; margin: 1.8rem auto; flex-wrap: wrap; }
+    .score-pill { 
+      background: white; border: 1px solid #e5e7eb; border-radius: 50px; 
+      padding: 9px 22px; font-size: 14.5px; box-shadow: 0 3px 10px rgba(0,0,0,0.07); 
+    }
+    .score-pill span { font-weight: 700; color: #1e40af; }
+
+    .module-grid { 
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); 
+      gap: 18px; padding: 1.2rem; 
+    }
+    .mod-card { 
+      background: white; border: 1px solid #e5e7eb; border-radius: 18px; 
+      padding: 1.4rem; cursor: pointer; transition: all 0.25s cubic-bezier(0.4,0,0.2,1); 
+      position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    }
+    .mod-card:hover { 
+      transform: translateY(-6px) scale(1.02); 
+      border-color: #3b82f6; 
+      box-shadow: 0 12px 25px rgba(59,130,246,0.18); 
+    }
+    .mod-icon { 
+      width: 56px; height: 56px; border-radius: 14px; 
+      display: flex; align-items: center; justify-content: center; 
+      font-size: 30px; margin-bottom: 14px; 
+    }
+    .mod-card h3 { font-size: 17.5px; margin-bottom: 7px; font-weight: 600; }
+    .mod-card p { font-size: 13.8px; color: #64748b; line-height: 1.5; }
+    .mod-badge { 
+      position: absolute; top: 14px; right: 14px; 
+      font-size: 11.5px; padding: 4px 11px; border-radius: 999px; font-weight: 600; 
+    }
+    .badge-new { background: #fef3c7; color: #b45309; }
+    .badge-done { background: #d1fae5; color: #10b981; }
+
+    .progress-bar { height: 6px; background: #e5e7eb; border-radius: 999px; margin-top: 14px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa); transition: width 0.5s ease; }
+
+    .game-header { display: flex; align-items: center; gap: 14px; margin-bottom: 1.6rem; }
+    .back-btn { 
+      background: white; border: 1px solid #cbd5e1; padding: 9px 18px; 
+      border-radius: 12px; font-size: 14.5px; cursor: pointer; transition: 0.2s; 
+    }
+    .back-btn:hover { background: #f1f5f9; }
+    .lives-row { margin-left: auto; font-size: 22px; }
+
+    .scenario-card { 
+      background: white; border: 1px solid #e2e8f0; border-radius: 18px; 
+      padding: 1.6rem; margin-bottom: 1.6rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); 
+    }
+    .scenario-q { font-size: 17.2px; font-weight: 600; line-height: 1.55; margin-bottom: 1rem; }
+
+    .choice-list { display: flex; flex-direction: column; gap: 11px; }
+    .choice-btn { 
+      padding: 15px 19px; background: white; border: 1.5px solid #e2e8f0; 
+      border-radius: 14px; text-align: left; cursor: pointer; 
+      transition: all 0.2s cubic-bezier(0.4,0,0.2,1); font-size: 15.2px; 
+    }
+    .choice-btn:hover:not(.disabled) { 
+      border-color: #3b82f6; transform: translateX(4px); 
+    }
+    .choice-btn.correct { background: #ecfdf5; border-color: #10b981; color: #065f46; }
+    .choice-btn.wrong { background: #fef2f2; border-color: #ef4444; color: #991b1b; }
+    .choice-btn.disabled { cursor: not-allowed; }
+
+    .feedback-box { 
+      min-height: 68px; padding: 1.1rem 1.3rem; background: #f8fafc; 
+      border-radius: 14px; font-size: 15px; line-height: 1.55; margin-bottom: 1.2rem; 
+    }
+
+    .next-btn { 
+      background: #1e40af; color: white; border: none; padding: 13px 34px; 
+      border-radius: 14px; font-size: 15.5px; cursor: pointer; 
+      width: 100%; max-width: 300px; margin: 0 auto; display: block; 
+      transition: background 0.2s; 
+    }
+    .next-btn:hover { background: #1e3a8a; }
+
+    /* Password Lab specific styles */
+    .pw-input-row { display: flex; gap: 8px; max-width: 480px; margin: 0 auto 1rem; }
+    .pw-input { flex: 1; padding: 12px 16px; font-size: 16px; border: 1.5px solid #e2e8f0; border-radius: 12px; background: white; }
+    .pw-input:focus { outline: none; border-color: #3b82f6; }
+    .toggle-btn { background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 12px; padding: 0 18px; cursor: pointer; font-size: 14px; }
+    .pw-meter { max-width: 480px; margin: 0 auto 1.5rem; }
+    .meter-bar { height: 10px; background: #e5e7eb; border-radius: 999px; overflow: hidden; margin-bottom: 8px; }
+    .meter-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease, background 0.4s; }
+    .meter-label { font-size: 14px; font-weight: 600; text-align: center; margin-bottom: 1rem; }
+    .pw-checks { max-width: 480px; margin: 0 auto 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pw-check { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #64748b; }
+    .check-dot { width: 12px; height: 12px; border-radius: 50%; background: #e5e7eb; flex-shrink: 0; transition: all 0.2s; }
+    .check-dot.pass { background: #10b981; }
+    .tip-grid { max-width: 480px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .tip-card { background: #f8fafc; border-radius: 12px; padding: 12px; font-size: 13.5px; line-height: 1.5; }
+
+    .result-center { text-align: center; padding: 2.5rem 1.2rem; }
+    .result-emoji { font-size: 72px; margin-bottom: 1rem; animation: pop 0.6s ease; }
+    @keyframes pop { 0% { transform: scale(0.6); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- HUB -->
+  <div id="hub" class="screen active">
+    <div class="hub-header">
+      <h1>SafeClick India</h1>
+      <p>Learn real safety against UPI scams, QR fraud, phishing & mobile threats</p>
+    </div>
+    <div class="score-bar">
+      <div class="score-pill">Total XP <span id="total-xp">0</span></div>
+      <div class="score-pill">Completed <span id="mod-done">0</span>/7</div>
+      <div class="score-pill">Level <span id="rank-label">Beginner</span></div>
+    </div>
+    <div class="module-grid" id="module-grid"></div>
+  </div>
+
+  <!-- UPI SAFETY -->
+  <div id="screen-upi" class="screen">
+    <div class="game-header">
+      <button class="back-btn" onclick="goHub()">← Home</button>
+      <span style="font-weight:600;font-size:18px;">UPI & Banking Safety</span>
+      <div class="lives-row" id="upi-lives"></div>
+    </div>
+    <div class="scenario-card"><div class="scenario-q" id="upi-q"></div></div>
+    <div class="choice-list" id="upi-choices"></div>
+    <div class="feedback-box" id="upi-feedback">One wrong tap can cost real money.</div>
+    <button class="next-btn" id="upi-next" onclick="nextUpi()" disabled>Next Scenario →</button>
+  </div>
+
+  <!-- QR CODE SAFETY -->
+  <div id="screen-qr" class="screen">
+    <div class="game-header">
+      <button class="back-btn" onclick="goHub()">← Home</button>
+      <span style="font-weight:600;font-size:18px;">QR Code Safety</span>
+      <div class="lives-row" id="qr-lives"></div>
+    </div>
+    <div class="scenario-card"><div class="scenario-q" id="qr-q"></div></div>
+    <div class="choice-list" id="qr-choices"></div>
+    <div class="feedback-box" id="qr-feedback">Scan carefully — it can drain your account.</div>
+    <button class="next-btn" id="qr-next" onclick="nextQr()" disabled>Next Scenario →</button>
+  </div>
+
+  <!-- MOBILE SAFETY -->
+  <div id="screen-mobile" class="screen">
+    <div class="game-header">
+      <button class="back-btn" onclick="goHub()">← Home</button>
+      <span style="font-weight:600;font-size:18px;">Mobile Device Safety</span>
+      <div class="lives-row" id="mobile-lives"></div>
+    </div>
+    <div class="scenario-card"><div class="scenario-q" id="mobile-q"></div></div>
+    <div class="choice-list" id="mobile-choices"></div>
+    <div class="feedback-box" id="mobile-feedback">Keep your phone protected.</div>
+    <button class="next-btn" id="mobile-next" onclick="nextMobile()" disabled>Next Scenario →</button>
+  </div>
+
+  <!-- PHISHING & SMISHING -->
+  <div id="screen-phishing" class="screen">
+    <div class="game-header">
+      <button class="back-btn" onclick="goHub()">← Home</button>
+      <span style="font-weight:600;font-size:18px;">Phishing & Smishing</span>
+      <div class="lives-row" id="phishing-lives"></div>
+    </div>
+    <div class="scenario-card"><div class="scenario-q" id="phishing-q"></div></div>
+    <div class="choice-list" id="phishing-choices"></div>
+    <div class="feedback-box" id="phishing-feedback">Spot the fake before you click.</div>
+    <button class="next-btn" id="phishing-next" onclick="nextPhishing()" disabled>Next Scenario →</button>
+  </div>
+
+  <!-- DIGITAL HYGIENE -->
+  <div id="screen-hygiene" class="screen">
+    <div class="game-header">
+      <button class="back-btn" onclick="goHub()">← Home</button>
+      <span style="font-weight:600;font-size:18px;">Digital Hygiene</span>
+      <div class="lives-row" id="hygiene-lives"></div>
+    </div>
+    <div class="scenario-card"><div class="scenario-q" id="hygiene-q"></div></div>
+    <div class="choice-list" id="hygiene-choices"></div>
+    <div class="feedback-box" id="hygiene-feedback">Small habits = big protection.</div>
+    <button class="next-btn" id="hygiene-next" onclick="nextHygiene()" disabled>Next Scenario →</button>
+  </div>
+
+  <!-- SOCIAL ENGINEERING -->
+  <div id="screen-social" class="screen">
+    <div class="game-header">
+      <button class="back-btn" onclick="goHub()">← Home</button>
+      <span style="font-weight:600;font-size:18px;">Social Engineering</span>
+      <div class="lives-row" id="social-lives"></div>
+    </div>
+    <div class="scenario-card"><div class="scenario-q" id="social-q"></div></div>
+    <div class="choice-list" id="social-choices"></div>
+    <div class="feedback-box" id="social-feedback">Trust, but always verify.</div>
+    <button class="next-btn" id="social-next" onclick="nextSocial()" disabled>Next Scenario →</button>
+  </div>
+
+  <!-- PASSWORD & MFA (Interactive Lab + Scenarios) -->
+  <div id="screen-password" class="screen">
+    <div class="game-header">
+      <button class="back-btn" onclick="goHub()">← Home</button>
+      <span style="font-weight:600;font-size:18px;">Password & MFA Mastery</span>
+    </div>
+    <div style="max-width:520px;margin:0 auto;">
+      <p style="text-align:center;font-size:14.5px;color:#64748b;margin-bottom:1.5rem;">
+        Type any password below to see its strength in real-time. Nothing is sent anywhere.
+      </p>
+      <div class="pw-input-row">
+        <input class="pw-input" type="password" id="pw-field" placeholder="Enter a password…" oninput="analysePassword()">
+        <button class="toggle-btn" onclick="togglePw()">Show</button>
+      </div>
+      <div class="pw-meter">
+        <div class="meter-bar"><div class="meter-fill" id="meter-fill" style="width:0%;background:#ef4444;"></div></div>
+        <div class="meter-label" id="meter-label">Start typing…</div>
+      </div>
+      <div id="crack-time" style="text-align:center;font-size:13.5px;color:#64748b;margin-bottom:1.5rem;"></div>
+      
+      <div class="pw-checks">
+        <div class="pw-check"><div class="check-dot" id="c-len"></div><span>12+ characters</span></div>
+        <div class="pw-check"><div class="check-dot" id="c-upper"></div><span>Uppercase letter</span></div>
+        <div class="pw-check"><div class="check-dot" id="c-lower"></div><span>Lowercase letter</span></div>
+        <div class="pw-check"><div class="check-dot" id="c-num"></div><span>Number</span></div>
+        <div class="pw-check"><div class="check-dot" id="c-sym"></div><span>Special symbol</span></div>
+        <div class="pw-check"><div class="check-dot" id="c-nodict"></div><span>No common words</span></div>
+      </div>
+
+      <div class="tip-grid">
+        <div class="tip-card"><strong>Use a passphrase</strong>4 random words are easier to remember and much harder to crack.</div>
+        <div class="tip-card"><strong>Never reuse passwords</strong>One breach can compromise all your accounts.</div>
+        <div class="tip-card"><strong>Enable MFA everywhere</strong>Even a stolen password is useless with 2-factor authentication.</div>
+        <div class="tip-card"><strong>Use a password manager</strong>Bitwarden / 1Password generates and stores strong unique passwords.</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="finishPasswordLab()" style="margin-top:2rem;background:#10b981;">Finish & Get XP</button>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="screen-result" class="screen">
+    <div class="result-center">
+      <div class="result-emoji" id="res-emoji">🏆</div>
+      <div class="result-title" id="res-title" style="font-size:27px;font-weight:700;margin-bottom:8px;">Module Complete!</div>
+      <div id="res-sub" style="margin:1rem 0;font-size:15.5px;color:#64748b;"></div>
+      <div style="display:flex;justify-content:center;gap:2.2rem;margin:2.2rem 0;">
+        <div style="text-align:center;"><div id="res-score" style="font-size:34px;font-weight:700;color:#1e40af;">0</div><div style="font-size:13px;color:#64748b;">Correct</div></div>
+        <div style="text-align:center;"><div id="res-acc" style="font-size:34px;font-weight:700;color:#10b981;">0%</div><div style="font-size:13px;color:#64748b;">Accuracy</div></div>
+        <div style="text-align:center;"><div id="res-xp" style="font-size:34px;font-weight:700;color:#f59e0b;">+0</div><div style="font-size:13px;color:#64748b;">XP Earned</div></div>
+      </div>
+      <div id="res-tip" style="background:#f1f5f9;padding:1.4rem;border-radius:16px;font-size:15.2px;line-height:1.6;margin-bottom:2rem;"></div>
+      <button class="next-btn" onclick="replayModule()" style="background:#10b981;margin-bottom:14px;">Replay Module</button>
+      <button class="next-btn" onclick="goHub()" style="background:#64748b;">Back to Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== SOUND EFFECTS (free public URLs) ====================
+const sounds = {
+  correct: new Audio("https://orangefreesounds.com/wp-content/uploads/2024/11/Game-show-ding-sound-effect.mp3"),
+  wrong: new Audio("https://assets.mixkit.co/sfx/preview/2578/2578.wav"),
+  click: new Audio("https://assets.mixkit.co/sfx/preview/2570/2570.wav")
+};
+
+function playSound(type) {
+  const audio = sounds[type];
+  if (audio) {
+    audio.currentTime = 0;
+    audio.volume = type === 'correct' ? 0.75 : 0.6;
+    audio.play().catch(() => {});
+  }
+}
+
+// ==================== STATE & MODULES ====================
+let state = { xp: 0, moduleDone: {}, currentModule: '', currentQ: 0, correct: 0, total: 0, lives: 3 };
+
+const MODULES = [
+  { id: "upi",      name: "UPI & Banking Safety", icon: "₹",   color: "#10b981", desc: "Avoid collect requests, refund scams & fake links" },
+  { id: "qr",       name: "QR Code Safety",       icon: "🔳",   color: "#ef4444", desc: "Never scan unknown QR codes — they can drain your account" },
+  { id: "mobile",   name: "Mobile Device Safety", icon: "📱",   color: "#3b82f6", desc: "Protect your phone from malware, spyware & theft" },
+  { id: "phishing", name: "Phishing & Smishing",   icon: "🎣",   color: "#f59e0b", desc: "Spot fake emails, SMS & WhatsApp messages" },
+  { id: "hygiene",  name: "Digital Hygiene",       icon: "🛡️",   color: "#8b5cf6", desc: "Daily habits that keep you safe" },
+  { id: "social",   name: "Social Engineering",    icon: "🕵️",   color: "#14b8a6", desc: "Recognise impersonation tricks" },
+  { id: "password", name: "Password & MFA Mastery",icon: "🔑",   color: "#eab308", desc: "Create strong passwords and use 2FA properly" }
+];
+
+// ==================== SCENARIOS (All modules now have 6–8 questions) ====================
+
+// UPI (already had 7)
+const UPI_SCENARIOS = [ /* same as previous version - kept for brevity, already expanded */ 
+  { q: "You receive a WhatsApp: 'I sent ₹5000 by mistake. Return to this UPI ID.'", choices: [{text:"Send money back",correct:false},{text:"Call on saved number to confirm",correct:true}], explain: "Always verify via voice call on saved contact before any transfer." },
+  { q: "You get a UPI collect request for ₹4,999 labelled 'Refund for failed order'.", choices: [{text:"Pay the collect request",correct:false},{text:"Decline and check bank app directly",correct:true}], explain: "Never pay unsolicited collect requests claiming refunds." },
+  { q: "Delivery agent asks you to scan QR code to 'confirm delivery & get cashback'.", choices: [{text:"Scan the QR",correct:false},{text:"Verify in official app only",correct:true}], explain: "Delivery agents never ask you to scan QR for cashback or confirmation." },
+  { q: "SMS from 'bank': 'Your UPI is blocked. Update now: [link]'", choices: [{text:"Click link and update",correct:false},{text:"Ignore and login directly in app",correct:true}], explain: "Banks never send links for urgent updates via SMS." },
+  { q: "Friend shares UPI QR saying 'Scan to split the bill'.", choices: [{text:"Scan and pay",correct:true},{text:"Ask them to send collect request instead",correct:false}], explain: "For receiving money, better to use UPI ID or request collect — scanning QR authorises payment from you." },
+  { q: "You see a QR code on a roadside stall for 'Scan & Pay'. The name shown after scanning is slightly different.", choices: [{text:"Proceed and enter PIN",correct:false},{text:"Cancel and pay by cash or verify merchant",correct:true}], explain: "Always double-check the exact recipient name before entering UPI PIN." },
+  { q: "Unknown number calls claiming to be from your bank and asks for OTP to 'verify your UPI'.", choices: [{text:"Share the OTP",correct:false},{text:"Never share OTP with anyone",correct:true}], explain: "Legitimate banks never ask for OTP over phone." }
+];
+
+// QR (already had 8)
+const QR_SCENARIOS = [ /* same as previous - kept */ 
+  { q: "On OLX, buyer says: 'Scan this QR to receive my payment for the item.'", choices: [{text:"Scan the QR",correct:false},{text:"Never scan QR to receive money — ask for UPI ID",correct:true}], explain: "Scanning a QR code authorises payment FROM your account." },
+  { q: "A QR code is pasted over the original shop QR at a restaurant or parking slot.", choices: [{text:"Scan it anyway",correct:false},{text:"Verify merchant name carefully before paying",correct:true}], explain: "Fraudsters replace real QR codes with fake ones." },
+  { q: "Stranger asks you to scan QR on his phone so he can 'send you money'.", choices: [{text:"Help by scanning",correct:false},{text:"Politely refuse",correct:true}], explain: "This is a common scam trick." },
+  { q: "Message with QR: 'Scan to claim your ₹1500 Flipkart cashback'.", choices: [{text:"Scan immediately",correct:false},{text:"Ignore unsolicited QR codes",correct:true}], explain: "Legitimate companies rarely send cashback via random QR codes." },
+  { q: "Metro station has a QR code for 'Scan to buy ticket & get 20% off'.", choices: [{text:"Scan and pay",correct:true},{text:"Avoid and use official app",correct:false}], explain: "Use only official apps or verified counters for tickets." },
+  { q: "Friend forwards a QR code saying 'Scan for free government scheme benefit'.", choices: [{text:"Scan it",correct:false},{text:"Verify on official government website first",correct:true}], explain: "Government schemes never ask you to scan random QR codes." },
+  { q: "You find a QR code flyer in your society for 'Free COVID/Health Checkup — Scan Now'.", choices: [{text:"Scan the code",correct:false},{text:"Ignore or verify through official sources",correct:true}], explain: "Health-related QR scams are common for stealing data or installing malware." },
+  { q: "Cab driver asks you to scan his personal QR instead of using the app payment.", choices: [{text:"Scan and pay",correct:false},{text:"Insist on paying through the official cab app only",correct:true}], explain: "Always complete payment inside the app to avoid fraud." }
+];
+
+// Mobile (already had 6)
+const MOBILE_SCENARIOS = [ /* same as previous */ 
+  { q: "You want a popular paid app for free. Someone shares an APK via WhatsApp.", choices: [{text:"Install the APK",correct:false},{text:"Download only from Google Play / App Store",correct:true}], explain: "Sideloading is the #1 way Android phones get banking malware." },
+  { q: "Pop-up claims your phone has 23 viruses and asks to install 'Security Fix'.", choices: [{text:"Install the app",correct:false},{text:"Close pop-up and ignore",correct:true}], explain: "This is scareware." },
+  { q: "Unknown caller claims to be from Google/Apple and asks to share screen for 'technical support'.", choices: [{text:"Share screen",correct:false},{text:"Hang up immediately",correct:true}], explain: "Never share your screen with unsolicited callers." },
+  { q: "You receive a link via SMS: 'Your phone bill is due. Pay here to avoid disconnection.'", choices: [{text:"Click the link",correct:false},{text:"Login directly in your telecom app",correct:true}], explain: "Telecom companies never send payment links via SMS." },
+  { q: "Your phone shows 'USB debugging enabled' after installing a new app you don't remember.", choices: [{text:"Ignore it",correct:false},{text:"Turn off USB debugging and uninstall suspicious apps",correct:true}], explain: "USB debugging should stay off unless you intentionally enabled it." },
+  { q: "A new launcher or ' cleaner' app asks for accessibility permission.", choices: [{text:"Grant permission",correct:false},{text:"Deny and uninstall the app",correct:true}], explain: "Accessibility permission is often abused by spyware." }
+];
+
+// NEW: PHISHING & SMISHING (7 scenarios)
+const PHISHING_SCENARIOS = [
+  { q: "You get an SMS: 'Your Amazon order is ready. Click here to confirm: [link]'", choices: [{text:"Click the link",correct:false},{text:"Go to Amazon.in directly in browser",correct:true}], explain: "Never click links in unsolicited messages. Type the official website yourself." },
+  { q: "WhatsApp from 'IRCTC': 'Your ticket is cancelled. Click to get refund.'", choices: [{text:"Click the link",correct:false},{text:"Login directly in IRCTC app",correct:true}], explain: "Government & official services never send refund links via WhatsApp." },
+  { q: "Email from 'support@paytm.com' asking you to 'verify your KYC now'.", choices: [{text:"Click to verify",correct:false},{text:"Ignore — Paytm never asks via email",correct:true}], explain: "Phishing domains often look almost real. Always go to the official app/site." },
+  { q: "SMS from unknown number: 'Your bank account is under fraud alert. Call this number now.'", choices: [{text:"Call the number",correct:false},{text:"Call the number printed on your bank card",correct:true}], explain: "This is vishing (voice phishing). Banks never ask you to call random numbers." },
+  { q: "You receive a link on WhatsApp: 'Your Aadhaar is linked to a new SIM. Click to stop.'", choices: [{text:"Click the link",correct:false},{text:"Verify on official UIDAI website only",correct:true}], explain: "Government never sends urgent links like this." },
+  { q: "Fake email from 'Google' saying your account will be suspended unless you click to verify.", choices: [{text:"Click to verify",correct:false},{text:"Go to accounts.google.com directly",correct:true}], explain: "Google never sends such threatening emails." },
+  { q: "SMS: 'Congratulations! You won ₹1 Lakh. Claim now: [link]'", choices: [{text:"Claim the prize",correct:false},{text:"Delete the message",correct:true}], explain: "Lottery/gift scams are extremely common via SMS." }
+];
+
+// NEW: DIGITAL HYGIENE (6 scenarios)
+const HYGIENE_SCENARIOS = [
+  { q: "You are leaving your desk for 10 minutes with important apps open.", choices: [{text:"Leave everything open",correct:false},{text:"Lock your screen (Win+L or Cmd+Ctrl+Q)",correct:true}], explain: "Locking your screen prevents shoulder surfing and unauthorised access." },
+  { q: "Your phone shows a software update notification while you're on public Wi-Fi.", choices: [{text:"Dismiss it",correct:false},{text:"Update as soon as possible",correct:true}], explain: "Security updates patch known vulnerabilities — install them quickly." },
+  { q: "A flashlight app asks for access to your contacts, microphone and location.", choices: [{text:"Grant all permissions",correct:false},{text:"Deny unnecessary permissions",correct:true}], explain: "A flashlight app needs ZERO access to contacts or location." },
+  { q: "You connect to a free public Wi-Fi at a café.", choices: [{text:"Use it normally",correct:false},{text:"Turn on VPN before using",correct:true}], explain: "Public Wi-Fi is often monitored. A VPN encrypts your traffic." },
+  { q: "You get a prompt to 'share screen' during a random customer-care call.", choices: [{text:"Share your screen",correct:false},{text:"Never share screen with unknown callers",correct:true}], explain: "Screen sharing is a common social engineering technique." },
+  { q: "You use the same password for your bank, email and shopping accounts.", choices: [{text:"It's convenient",correct:false},{text:"Use unique strong passwords everywhere",correct:true}], explain: "One breach can compromise all your accounts if passwords are reused." }
+];
+
+// NEW: SOCIAL ENGINEERING (6 scenarios)
+const SOCIAL_SCENARIOS = [
+  { q: "Someone calls claiming to be from your bank and says 'We need your OTP to stop fraud on your account'.", choices: [{text:"Share the OTP",correct:false},{text:"Never share OTP — hang up and call your bank directly",correct:true}], explain: "Banks never ask for OTP over the phone." },
+  { q: "A 'HR executive' on LinkedIn asks for your personal email and phone number for a job offer.", choices: [{text:"Share the details",correct:false},{text:"Verify the profile and company first",correct:true}], explain: "This is pretexting for identity theft or spear-phishing." },
+  { q: "Your 'CEO' sends a WhatsApp message asking you to buy gift cards urgently and share the codes.", choices: [{text:"Do it immediately",correct:false},{text:"Verify via a phone call to the real CEO",correct:true}], explain: "CEO fraud / Business Email Compromise is very common." },
+  { q: "Someone in a delivery uniform asks you to hold the door open while carrying boxes into your office building.", choices: [{text:"Hold the door",correct:false},{text:"Ask them to badge in separately",correct:true}], explain: "Tailgating is a physical social engineering attack." },
+  { q: "A friend on WhatsApp says their phone is broken and asks you to send money to a new UPI ID.", choices: [{text:"Send the money",correct:false},{text:"Call them on their real number to confirm",correct:true}], explain: "Account takeover scams often impersonate friends." },
+  { q: "An unknown person calls saying they are from 'tech support' and your computer is sending viruses.", choices: [{text:"Follow their instructions",correct:false},{text:"Hang up immediately",correct:true}], explain: "Tech support scams are rampant in India." }
+];
+
+// NEW: PASSWORD & MFA (6 scenario questions)
+const PASSWORD_SCENARIOS = [
+  { q: "Which of these is the strongest password?", choices: [{text:"Password123",correct:false},{text:"MyDog2025!",correct:false},{text:"correct-horse-battery-staple",correct:true}], explain: "A long passphrase made of random words is far stronger and easier to remember than short complex passwords." },
+  { q: "You receive a password reset link you didn't request. What should you do?", choices: [{text:"Click the link and reset",correct:false},{text:"Ignore it and check your accounts directly",correct:true}], explain: "Unsolicited reset links are often phishing attempts." },
+  { q: "You have 2FA enabled on your email but not on your bank account.", choices: [{text:"It's fine — email is enough",correct:false},{text:"Enable 2FA on every important account",correct:true}], explain: "MFA should be enabled on banking, email, and shopping accounts first." },
+  { q: "You reuse the same strong password across 8 different websites.", choices: [{text:"It's okay if it's strong",correct:false},{text:"Use a password manager for unique passwords",correct:true}], explain: "Password reuse is one of the biggest risks." },
+  { q: "Your password manager suggests a 20-character random password.", choices: [{text:"Use a shorter one you can remember",correct:false},{text:"Use the suggested strong password",correct:true}], explain: "Long random passwords are the safest when managed properly." },
+  { q: "You get a call asking you to 'verify' your account by giving your current password.", choices: [{text:"Give the password",correct:false},{text:"Never share your password with anyone",correct:true}], explain: "No legitimate company will ever ask for your password over phone or email." }
+];
+
+// ==================== HELPER FUNCTIONS ====================
+function getEl(id) { return document.getElementById(id); }
+
+function updateHub() {
+  getEl('total-xp').textContent = state.xp;
+  getEl('mod-done').textContent = Object.keys(state.moduleDone).length;
+
+  const ranks = [[0,'Beginner'],[250,'Aware User'],[550,'Safe Surfer'],[850,'Defender'],[1200,'Cyber Smart']];
+  const rank = ranks.filter(r => state.xp >= r[0]).pop()[1];
+  getEl('rank-label').textContent = rank;
+
+  const grid = getEl('module-grid');
+  grid.innerHTML = '';
+
+  MODULES.forEach(m => {
+    const done = !!state.moduleDone[m.id];
+    const card = document.createElement('div');
+    card.className = 'mod-card';
+    card.innerHTML = `
+      <div class="mod-badge ${done ? 'badge-done' : 'badge-new'}">${done ? 'DONE' : 'NEW'}</div>
+      <div class="mod-icon" style="background:${m.color}20;color:${m.color}">${m.icon}</div>
+      <h3>${m.name}</h3>
+      <p>${m.desc}</p>
+      <div class="progress-bar"><div class="progress-fill" style="width:${done ? '100%' : '0%'}"></div></div>
+    `;
+    card.onclick = () => startModule(m.id);
+    grid.appendChild(card);
+  });
+}
+
+function renderLives(id) {
+  getEl(id).innerHTML = Array(3).fill(0).map((_,i) => i < state.lives ? '❤️' : '🖤').join(' ');
+}
+
+function startModule(mod) {
+  state.currentModule = mod;
+  state.currentQ = 0;
+  state.correct = 0;
+  state.total = 0;
+  state.lives = 3;
+
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+
+  if (mod === 'upi') { renderUpi(); getEl('screen-upi').classList.add('active'); }
+  else if (mod === 'qr') { renderQr(); getEl('screen-qr').classList.add('active'); }
+  else if (mod === 'mobile') { renderMobile(); getEl('screen-mobile').classList.add('active'); }
+  else if (mod === 'phishing') { renderPhishing(); getEl('screen-phishing').classList.add('active'); }
+  else if (mod === 'hygiene') { renderHygiene(); getEl('screen-hygiene').classList.add('active'); }
+  else if (mod === 'social') { renderSocial(); getEl('screen-social').classList.add('active'); }
+  else if (mod === 'password') { renderPasswordLab(); getEl('screen-password').classList.add('active'); }
+  else goHub();
+}
+
+// Generic answer handler (used by all scenario modules)
+function selectAnswer(module, idx, isCorrect, explain) {
+  const containerId = module + '-choices';
+  const feedbackId = module + '-feedback';
+  const nextId = module + '-next';
+
+  const btns = getEl(containerId).children;
+  Array.from(btns).forEach(b => { b.disabled = true; b.classList.add('disabled'); });
+
+  state.total++;
+  playSound(isCorrect ? 'correct' : 'wrong');
+
+  if (isCorrect) {
+    btns[idx].classList.add('correct');
+    state.correct++;
+    getEl(feedbackId).innerHTML = `✅ Correct! ${explain}`;
+  } else {
+    btns[idx].classList.add('wrong');
+    state.lives = Math.max(0, state.lives - 1);
+    renderLives(module + '-lives');
+    getEl(feedbackId).innerHTML = `❌ Wrong. ${explain}`;
+  }
+  getEl(nextId).disabled = false;
+}
+
+// ==================== RENDER FUNCTIONS FOR EACH MODULE ====================
+
+// UPI, QR, Mobile (unchanged from previous - just calling render)
+function renderUpi() {
+  const q = UPI_SCENARIOS[state.currentQ];
+  getEl('upi-q').textContent = q.q;
+  getEl('upi-feedback').textContent = "Choose the safest action.";
+  getEl('upi-next').disabled = true;
+  const container = getEl('upi-choices'); container.innerHTML = '';
+  q.choices.forEach((c,i) => {
+    const btn = document.createElement('button'); btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => { playSound('click'); selectAnswer('upi', i, c.correct, q.explain); };
+    container.appendChild(btn);
+  });
+  renderLives('upi-lives');
+}
+function nextUpi() { state.currentQ++; if (state.currentQ >= UPI_SCENARIOS.length || state.lives <= 0) showResult(); else renderUpi(); }
+
+function renderQr() {
+  const q = QR_SCENARIOS[state.currentQ];
+  getEl('qr-q').textContent = q.q;
+  getEl('qr-feedback').textContent = "Think before you scan.";
+  getEl('qr-next').disabled = true;
+  const container = getEl('qr-choices'); container.innerHTML = '';
+  q.choices.forEach((c,i) => {
+    const btn = document.createElement('button'); btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => { playSound('click'); selectAnswer('qr', i, c.correct, q.explain); };
+    container.appendChild(btn);
+  });
+  renderLives('qr-lives');
+}
+function nextQr() { state.currentQ++; if (state.currentQ >= QR_SCENARIOS.length || state.lives <= 0) showResult(); else renderQr(); }
+
+function renderMobile() {
+  const q = MOBILE_SCENARIOS[state.currentQ];
+  getEl('mobile-q').textContent = q.q;
+  getEl('mobile-feedback').textContent = "Protect your device.";
+  getEl('mobile-next').disabled = true;
+  const container = getEl('mobile-choices'); container.innerHTML = '';
+  q.choices.forEach((c,i) => {
+    const btn = document.createElement('button'); btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => { playSound('click'); selectAnswer('mobile', i, c.correct, q.explain); };
+    container.appendChild(btn);
+  });
+  renderLives('mobile-lives');
+}
+function nextMobile() { state.currentQ++; if (state.currentQ >= MOBILE_SCENARIOS.length || state.lives <= 0) showResult(); else renderMobile(); }
+
+// NEW MODULES
+function renderPhishing() {
+  const q = PHISHING_SCENARIOS[state.currentQ];
+  getEl('phishing-q').textContent = q.q;
+  getEl('phishing-feedback').textContent = "Spot the fake before you click.";
+  getEl('phishing-next').disabled = true;
+  const container = getEl('phishing-choices'); container.innerHTML = '';
+  q.choices.forEach((c,i) => {
+    const btn = document.createElement('button'); btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => { playSound('click'); selectAnswer('phishing', i, c.correct, q.explain); };
+    container.appendChild(btn);
+  });
+  renderLives('phishing-lives');
+}
+function nextPhishing() { state.currentQ++; if (state.currentQ >= PHISHING_SCENARIOS.length || state.lives <= 0) showResult(); else renderPhishing(); }
+
+function renderHygiene() {
+  const q = HYGIENE_SCENARIOS[state.currentQ];
+  getEl('hygiene-q').textContent = q.q;
+  getEl('hygiene-feedback').textContent = "Small habits = big protection.";
+  getEl('hygiene-next').disabled = true;
+  const container = getEl('hygiene-choices'); container.innerHTML = '';
+  q.choices.forEach((c,i) => {
+    const btn = document.createElement('button'); btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => { playSound('click'); selectAnswer('hygiene', i, c.correct, q.explain); };
+    container.appendChild(btn);
+  });
+  renderLives('hygiene-lives');
+}
+function nextHygiene() { state.currentQ++; if (state.currentQ >= HYGIENE_SCENARIOS.length || state.lives <= 0) showResult(); else renderHygiene(); }
+
+function renderSocial() {
+  const q = SOCIAL_SCENARIOS[state.currentQ];
+  getEl('social-q').textContent = q.q;
+  getEl('social-feedback').textContent = "Trust, but always verify.";
+  getEl('social-next').disabled = true;
+  const container = getEl('social-choices'); container.innerHTML = '';
+  q.choices.forEach((c,i) => {
+    const btn = document.createElement('button'); btn.className = 'choice-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => { playSound('click'); selectAnswer('social', i, c.correct, q.explain); };
+    container.appendChild(btn);
+  });
+  renderLives('social-lives');
+}
+function nextSocial() { state.currentQ++; if (state.currentQ >= SOCIAL_SCENARIOS.length || state.lives <= 0) showResult(); else renderSocial(); }
+
+// PASSWORD LAB (interactive + finish button gives XP)
+function renderPasswordLab() {
+  // Reset fields
+  getEl('pw-field').value = '';
+  analysePassword(); // initial state
+}
+
+function analysePassword() {
+  const pw = getEl('pw-field').value || '';
+  const len = pw.length;
+  const hasUpper = /[A-Z]/.test(pw);
+  const hasLower = /[a-z]/.test(pw);
+  const hasNum = /[0-9]/.test(pw);
+  const hasSym = /[^A-Za-z0-9]/.test(pw);
+  const noDict = true; // simplified for demo
+
+  getEl('c-len').classList.toggle('pass', len >= 12);
+  getEl('c-upper').classList.toggle('pass', hasUpper);
+  getEl('c-lower').classList.toggle('pass', hasLower);
+  getEl('c-num').classList.toggle('pass', hasNum);
+  getEl('c-sym').classList.toggle('pass', hasSym);
+  getEl('c-nodict').classList.toggle('pass', len >= 12);
+
+  const score = [len>=12, hasUpper, hasLower, hasNum, hasSym, len>=12].filter(Boolean).length;
+  const pct = Math.round(score / 6 * 100);
+  const fill = getEl('meter-fill');
+  fill.style.width = pct + '%';
+  const colors = ['#ef4444','#f59e0b','#eab308','#10b981','#10b981','#10b981'];
+  fill.style.background = colors[score] || '#10b981';
+
+  getEl('meter-label').textContent = len === 0 ? 'Start typing…' : ['Very weak','Weak','Moderate','Strong','Very strong','Excellent'][Math.min(score,5)];
+}
+
+function togglePw() {
+  const field = getEl('pw-field');
+  field.type = field.type === 'password' ? 'text' : 'password';
+  event.target.textContent = field.type === 'password' ? 'Show' : 'Hide';
+}
+
+function finishPasswordLab() {
+  // Give a solid XP reward for completing the lab
+  const xpEarned = 120;
+  state.xp += xpEarned;
+  state.moduleDone['password'] = true;
+  getEl('res-score').textContent = 'Lab Completed';
+  getEl('res-acc').textContent = '100%';
+  getEl('res-xp').textContent = '+' + xpEarned;
+  getEl('res-title').textContent = 'Great job on Password Mastery!';
+  getEl('res-emoji').textContent = '🔑';
+  getEl('res-tip').textContent = 'Using unique strong passwords + MFA is one of the most effective ways to stay safe online.';
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  getEl('screen-result').classList.add('active');
+  updateHub();
+}
+
+// ==================== RESULT & NAVIGATION ====================
+function showResult() {
+  const acc = state.total ? Math.round((state.correct / state.total) * 100) : 0;
+  const xpEarned = Math.round(acc * 2.3);
+
+  state.xp += xpEarned;
+  state.moduleDone[state.currentModule] = true;
+
+  getEl('res-score').textContent = `${state.correct}/${state.total}`;
+  getEl('res-acc').textContent = acc + '%';
+  getEl('res-xp').textContent = '+' + xpEarned;
+
+  const title = acc >= 80 ? "Excellent Work! 🎉" : acc >= 55 ? "Good Effort!" : "Keep Practising";
+  getEl('res-title').textContent = title;
+  getEl('res-emoji').textContent = acc >= 80 ? "🏆" : "👍";
+
+  const tipMap = {
+    qr: "Golden Rule: Never scan a QR code to 'receive' money.",
+    phishing: "Never click links in unsolicited messages. Always type the official URL yourself.",
+    hygiene: "Consistent small habits dramatically reduce your risk.",
+    social: "When something feels urgent or unusual — verify through a separate channel."
+  };
+  getEl('res-tip').textContent = tipMap[state.currentModule] || "Stay alert. Small careful actions prevent big losses.";
+
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  getEl('screen-result').classList.add('active');
+  updateHub();
+}
+
+function replayModule() {
+  startModule(state.currentModule);
+}
+
+function goHub() {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  getEl('hub').classList.add('active');
+  updateHub();
+}
+
+// ==================== INIT ====================
+updateHub();
+</script>
+</body>
+</html>
